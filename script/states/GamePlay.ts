@@ -10,6 +10,7 @@ module AdventureRoo {
         public badGuyGroup: Phaser.Group;
 
         public levelLoader: LevelLoader;
+        public collisionHandler: CollisionHandler;
 
         constructor() {
             super();
@@ -24,8 +25,11 @@ module AdventureRoo {
             this.badGuyGroup = new Phaser.Group(this.game, null, 'badGuyGroup');
             this.game.add.existing(this.badGuyGroup);
 
+            this.collisionHandler = new CollisionHandler(this.game);
+            this.collisionHandler.setDefaults();
+
             this.levelLoader = new LevelLoader(this.game);
-            this.levelLoader.load(this.mainCharacter, this.reward, this.badGuyGroup);
+            this.levelLoader.load(this.mainCharacter, this.reward, this.badGuyGroup, this.collisionHandler);
             console.log(this.mainCharacter);
             console.log(this.reward);
             //this.map = this.game.add.tilemap('level1');
@@ -49,6 +53,7 @@ module AdventureRoo {
         }
 
         public update():void {
+            this.collisionHandler.update();
             //this.game.physics.arcade.collide(this.mainCharacter, this.groundLayer);
             //this.game.physics.arcade.collide(this.badGuy, this.groundLayer);
             //this.game.physics.arcade.collide(this.badGuy, this.mainCharacter, this.mainCharacter.collisionHandler,

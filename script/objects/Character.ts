@@ -3,6 +3,7 @@ module AdventureRoo {
         public isDead: boolean = false;
         public backgroundLayer: any;
         public reward: Phaser.Sprite;
+        public hasReward: boolean = false;
 
         constructor(game:Phaser.Game, x:number, y:number, backgroundLayer: any, reward: Phaser.Sprite) {
             super(game, x, y, 'MainCharacter', 0);
@@ -24,10 +25,6 @@ module AdventureRoo {
                 return;
             }
 
-            this.game.physics.arcade.collide(this, this.backgroundLayer);
-            this.game.physics.arcade.collide(this.reward, this, this.collisionHandler,
-                null, this);
-
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
                 this.body.velocity.x = -150;
             } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
@@ -39,11 +36,15 @@ module AdventureRoo {
             }
         }
 
-        public collisionHandler():void {
+        public prepareForDeath():void {
             this.frame = 7;
             //this.visible = false;
             //this.body.velocity.set(0);
             this.isDead = true;
+        }
+
+        public setRewardComplete():void {
+            this.hasReward = true;
         }
     }
 }

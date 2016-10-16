@@ -7,7 +7,7 @@ module AdventureRoo {
         public init():void {
             this.game.stage.backgroundColor = '#ffffff';
 
-            let button: Phaser.Button = new Phaser.Button(this.game, 650 / 2, 400 - 50, 'Button', (): void => {
+            let button: Phaser.Button = new Phaser.Button(this.game, Global.GameWidth / 2, Global.GameHeight * 0.7, 'Button', (): void => {
                 //Go to Game state
                 this.game.state.start('GamePlay');
             });

@@ -9,8 +9,9 @@ module AdventureRoo {
         public init():void {
             this.game.stage.backgroundColor = '#ffffff';
 
-            this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+            this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
             this.game.scale.pageAlignHorizontally = true;
+
 
             this.game.load.onLoadStart.add(this.loadStart, this);
             this.game.load.onFileComplete.add(this.fileComplete, this);
