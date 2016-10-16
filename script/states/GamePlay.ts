@@ -66,6 +66,10 @@ module AdventureRoo {
         public showLevelCompleteDialog():void {
             var endGameDialog = new EndGameDialog(this.game, 100, 100);
             this.game.add.existing(endGameDialog);
+            endGameDialog.x = 100;
+            endGameDialog.y = 100;
+
+            console.log('show end dialog', endGameDialog)
         }
     }
 }

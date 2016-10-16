@@ -5,13 +5,13 @@ module AdventureRoo {
             super(game, null, 'EndGameDialog');
             this.game = game;
 
-            var bg = new Phaser.Graphics(this.game, x, y);
+            var bg = new Phaser.Graphics(this.game, 10, 10);
             bg.beginFill(0x292929);
-            bg.drawRoundedRect(x, y, 100, 100, 20);
+            bg.drawRoundedRect(10, 10, 400, 400, 20);
             bg.endFill();
             this.add(bg);
 
-            let button: Phaser.Button = new Phaser.Button(this.game, x, y, 'Button', (): void => {
+            let button: Phaser.Button = new Phaser.Button(this.game, bg.width / 2 , bg.height - 100, 'Button', (): void => {
                 if(Global.Level == 1){
                     Global.Level++;
                 }
