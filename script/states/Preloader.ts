@@ -22,7 +22,8 @@ module AdventureRoo {
         }
 
         public preload():void {
-            this.game.load.tilemap('level1', 'assets/atlases/level1.json', null, Phaser.Tilemap.TILED_JSON);
+            this.game.load.tilemap('Level1', 'assets/atlases/level1.json', null, Phaser.Tilemap.TILED_JSON);
+            this.game.load.tilemap('Level2', 'assets/atlases/level2.json', null, Phaser.Tilemap.TILED_JSON);
 
             this.game.load.spritesheet('Tile1', 'assets/atlases/tile1.png', 30, 30);
             this.game.load.spritesheet('Tile2', 'assets/atlases/tile2.png', 30, 30);

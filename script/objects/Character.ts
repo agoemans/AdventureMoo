@@ -1,8 +1,10 @@
 module AdventureRoo {
     export class Character extends Phaser.Sprite {
         public isDead: boolean = false;
+        public backgroundLayer: any;
+        public reward: Phaser.Sprite;
 
-        constructor(game:Phaser.Game, x:number, y:number) {
+        constructor(game:Phaser.Game, x:number, y:number, backgroundLayer: any, reward: Phaser.Sprite) {
             super(game, x, y, 'MainCharacter', 0);
             this.game = game;
 
@@ -10,7 +12,8 @@ module AdventureRoo {
             this.body.velocity.set(0);
             this.body.bounce.y = 0.2;
             this.body.gravity.y = 100;
-
+            this.backgroundLayer = backgroundLayer;
+            this.reward = reward;
         }
 
         public preload():void {
@@ -20,6 +23,11 @@ module AdventureRoo {
             if(this.isDead){
                 return;
             }
+
+            this.game.physics.arcade.collide(this, this.backgroundLayer);
+            this.game.physics.arcade.collide(this.reward, this, this.collisionHandler,
+                null, this);
+
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
                 this.body.velocity.x = -150;
             } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
