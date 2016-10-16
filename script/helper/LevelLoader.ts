@@ -35,9 +35,9 @@ module AdventureRoo {
             this.map.setCollision(3, true, this.levelNumber);
             this.map.setCollision(7, true, this.levelNumber);
 
-            console.log(this.map.tilesets[0].name);
+            //console.log(this.map.tilesets[0].name);
             this.map.objects.Characters.forEach((element) =>{
-                console.log(element);
+                //console.log(element);
                 switch (element.name){
                     case 'reward':
                         //todo move this to separate class

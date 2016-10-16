@@ -6,6 +6,7 @@ module AdventureRoo {
         public reward: any;
         public backgroundLayer: any;
         public door: any;
+        public onLevelComplete: Phaser.Signal;
 
         constructor(game: Phaser.Game) {
             this.game = game;
@@ -39,10 +40,25 @@ module AdventureRoo {
             this.door = door;
         }
 
+        public addLevelCompleteSignal(onlevelComplete: Phaser.Signal): void {
+            this.onLevelComplete = onlevelComplete;
+        }
+
+
         public setRewardComplete(): void {
             this.door.isOpened();
             this.reward.isPickedUp();
             this.mainCharacter.hasReward = true;
+            console.log(this.mainCharacter.hasReward);
+        }
+
+        public checkLevelComplete(): void {
+            console.log('evel complete called');
+            if(this.mainCharacter.hasReward){
+                this.onLevelComplete.dispatch();
+                this.door.body.enable = false;
+                this.mainCharacter.levelComplete();
+            }
         }
 
         public update():void {
@@ -55,6 +71,8 @@ module AdventureRoo {
 
             this.game.physics.arcade.collide(this.mainCharacter, this.backgroundLayer);
             this.game.physics.arcade.collide(this.door, this.backgroundLayer);
+            this.game.physics.arcade.collide(this.door, this.mainCharacter, this.checkLevelComplete,
+                null, this);
 
             this.game.physics.arcade.collide(this.reward, this.mainCharacter, this.setRewardComplete,
                 null, this);

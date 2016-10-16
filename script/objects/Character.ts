@@ -43,8 +43,9 @@ module AdventureRoo {
             this.isDead = true;
         }
 
-        public setRewardComplete():void {
-            this.hasReward = true;
+        public levelComplete():void {
+            this.body.velocity.set(0);
+            this.visible = false;
         }
     }
 }

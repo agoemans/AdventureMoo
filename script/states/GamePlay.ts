@@ -11,6 +11,7 @@ module AdventureRoo {
 
         public levelLoader: LevelLoader;
         public collisionHandler: CollisionHandler;
+        public onLevelComplete: Phaser.Signal;
 
         constructor() {
             super();
@@ -21,12 +22,18 @@ module AdventureRoo {
         }
 
         public preload():void {
-
+            this.game.world.shutdown();
             this.badGuyGroup = new Phaser.Group(this.game, null, 'badGuyGroup');
             this.game.add.existing(this.badGuyGroup);
 
+            this.onLevelComplete = new Phaser.Signal();
+            this.onLevelComplete.add(()=>{
+                this.showLevelCompleteDialog();
+            });
+
             this.collisionHandler = new CollisionHandler(this.game);
             this.collisionHandler.setDefaults();
+            this.collisionHandler.addLevelCompleteSignal(this.onLevelComplete);
 
             this.levelLoader = new LevelLoader(this.game);
             this.levelLoader.load(this.mainCharacter, this.reward, this.badGuyGroup, this.collisionHandler);
@@ -54,12 +61,11 @@ module AdventureRoo {
 
         public update():void {
             this.collisionHandler.update();
-            //this.game.physics.arcade.collide(this.mainCharacter, this.groundLayer);
-            //this.game.physics.arcade.collide(this.badGuy, this.groundLayer);
-            //this.game.physics.arcade.collide(this.badGuy, this.mainCharacter, this.mainCharacter.collisionHandler,
-            //    null, this.mainCharacter);
-            //this.game.physics.arcade.collide(this.reward, this.mainCharacter, this.mainCharacter.collisionHandler,
-            //    null, this.mainCharacter);
+        }
+
+        public showLevelCompleteDialog():void {
+            var endGameDialog = new EndGameDialog(this.game, 100, 100);
+            this.game.add.existing(endGameDialog);
         }
     }
 }

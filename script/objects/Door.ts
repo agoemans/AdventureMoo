@@ -6,9 +6,8 @@ module AdventureRoo {
 
             this.game.physics.arcade.enable(this);
             this.body.velocity.set(0);
-            this.body.bounce.y = 0.2;
-            this.body.gravity.y = 100;
-            this.body.immovable = true;
+            this.body.enable = true;
+            //this.body.immovable = true;
 
             this.game.add.existing(this);
         }
@@ -17,8 +16,9 @@ module AdventureRoo {
         }
 
         public isOpened():void {
-            this.visible = false;
-            this.body.enable = false;
+            //this.destroy();
+           this.visible = false;
+           // this.body.enable = false;
         }
     }
 }
