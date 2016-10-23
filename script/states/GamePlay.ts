@@ -4,7 +4,7 @@ module AdventureRoo {
         public map:any;
         public groundLayer:any;
         public mainCharacter:Character;
-        public badGuy:BadCharacter;
+        public badGuy:Enemy;
         public reward:Key;
 
         public badGuyGroup:Phaser.Group;
@@ -37,8 +37,6 @@ module AdventureRoo {
 
             this.levelLoader = new LevelLoader(this.game);
             this.levelLoader.load(this.mainCharacter, this.reward, this.badGuyGroup, this.collisionHandler);
-            console.log(this.mainCharacter);
-            console.log(this.reward);
         }
 
         public update():void {

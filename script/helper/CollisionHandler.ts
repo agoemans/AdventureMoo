@@ -1,7 +1,7 @@
 module AdventureRoo {
     export class CollisionHandler {
         public game: Phaser.Game;
-        public enemyList: BadCharacter[];
+        public enemyList: Enemy[];
         public mainCharacter: Character;
         public reward: Key;
         public backgroundLayer: any;
@@ -24,7 +24,7 @@ module AdventureRoo {
             this.key = null;
         }
 
-        public addEnemies(enemy: BadCharacter): void {
+        public addEnemies(enemy: Enemy): void {
             this.enemyList.push(enemy);
         }
 
@@ -78,6 +78,7 @@ module AdventureRoo {
         }
 
         public update():void {
+            //todo check for perf
             this.enemyList.forEach((enemy)=>{
                 this.game.physics.arcade.collide(enemy, this.mainCharacter, this.setLevelFail,
                     null, this);
@@ -86,7 +87,6 @@ module AdventureRoo {
             });
 
             this.game.physics.arcade.collide(this.mainCharacter, this.backgroundLayer);
-            this.game.physics.arcade.collide(this.exitDoor, this.backgroundLayer);
             this.game.physics.arcade.collide(this.exitDoor, this.mainCharacter, this.setLevelComplete,
                 null, this);
 

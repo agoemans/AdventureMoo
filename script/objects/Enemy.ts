@@ -1,5 +1,5 @@
 module AdventureRoo {
-    export class BadCharacter extends Phaser.Sprite {
+    export class Enemy extends Phaser.Sprite {
         public game:Phaser.Game;
         public backgroundLayer:any;
         public flipped:boolean = true;
@@ -13,10 +13,10 @@ module AdventureRoo {
             this.game = game;
 
             this.game.physics.arcade.enable(this);
-            //this.scale.setTo(3, 3);
             this.body.velocity.set(0);
             this.body.gravity.y = 100;
-            this.velocityX = Math.random() * (150 - 110) + 110;
+            this.velocityX = Math.random() * (Global.EnemyVelocityXMax - Global.EnemyVelocityXMin)
+                + Global.EnemyVelocityXMin;
         }
 
         public turnAround():void {

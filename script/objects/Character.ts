@@ -11,8 +11,8 @@ module AdventureRoo {
 
             this.game.physics.arcade.enable(this);
             this.body.velocity.set(0);
-            //this.body.bounce.y = 0.2;
-            this.body.gravity.y = 350;
+            //todo fix wonky movements and gravity
+            this.body.gravity.y = Global.CharacterGravity;
             this.backgroundLayer = backgroundLayer;
             this.reward = reward;
         }
@@ -23,20 +23,18 @@ module AdventureRoo {
             }
 
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-                this.body.velocity.x = -150;
+                this.body.velocity.x = -Global.CharacterVelocityX;
             } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-                this.body.velocity.x = 150;
+                this.body.velocity.x = Global.CharacterVelocityX;
             } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
                 this.body.velocity.x = 0;
             } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && this.body.onFloor()) {
-                this.body.velocity.y = -300;
+                this.body.velocity.y = -Global.CharacterVelocityY;
             }
         }
 
         public prepareForDeath():void {
             this.frame = 7;
-            //this.visible = false;
-            //this.body.velocity.set(0);
             this.isDead = true;
         }
 

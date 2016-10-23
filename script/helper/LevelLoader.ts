@@ -6,14 +6,13 @@ module AdventureRoo {
         public map:any;
         public groundLayer:any;
         public mainCharacter:Character;
-        public badGuy:BadCharacter;
+        public badGuy:Enemy;
         public reward:any;
         public levelNumber:string;
 
         constructor( game:Phaser.Game ) {
             this.game = game;
-            //this.levelNumber = 'Level' + Global.Level.toString();
-            this.levelNumber = 'Level3';
+            this.levelNumber = 'Level' + Global.Level.toString();
 
         }
 
@@ -52,12 +51,12 @@ module AdventureRoo {
                         collisionHandler.addMainCharacter(mainCharacter);
                         break;
                     case 'rat':
-                        let rat = new BadCharacter(this.game, element.x, element.y, 'Rat', 0);
+                        let rat = new Enemy(this.game, element.x, element.y, 'Rat', 0);
                         badGuy.add(rat);
                         collisionHandler.addEnemies(rat);
                         break;
                     case 'scorpion':
-                        let scorpion = new BadCharacter(this.game, element.x, element.y, 'Scorpion', 0);
+                        let scorpion = new Enemy(this.game, element.x, element.y, 'Scorpion', 0);
                         badGuy.add(scorpion);
                         collisionHandler.addEnemies(scorpion);
                         break;
