@@ -20,17 +20,24 @@ module AdventureRoo {
             this.loadingText = this.game.add.text(32, 32, 'Click to start load', {fill: '#ffffff'});
 
             this.physics.startSystem(Phaser.Physics.ARCADE);
+            //this.game.physics.arcade.gravity.y = 300;
         }
 
         public preload():void {
             this.game.load.tilemap('Level1', 'assets/atlases/level1.json', null, Phaser.Tilemap.TILED_JSON);
             this.game.load.tilemap('Level2', 'assets/atlases/level2.json', null, Phaser.Tilemap.TILED_JSON);
+            this.game.load.tilemap('Level3', 'assets/atlases/level3.json', null, Phaser.Tilemap.TILED_JSON);
 
             this.game.load.spritesheet('Tile1', 'assets/atlases/tile1.png', 30, 30);
             this.game.load.spritesheet('Tile2', 'assets/atlases/tile2.png', 30, 30);
             this.game.load.spritesheet('Tile3', 'assets/atlases/tile3.png', 30, 30, 1);
             this.game.load.spritesheet('Tile4', 'assets/atlases/tile4.png', 30, 30, 1);
-            this.game.load.spritesheet('Rat', 'assets/atlases/rat.png', 31, 20);
+            this.game.load.spritesheet('Rat', 'assets/atlases/rat.png', 37, 30);
+            this.game.load.spritesheet('Scorpion', 'assets/atlases/scorpion.png', 16, 15);
+            this.game.load.spritesheet('Wall', 'assets/atlases/wall.png', 32, 32);
+            this.game.load.spritesheet('Key', 'assets/atlases/key.png', 16, 12);
+            this.game.load.spritesheet('Door', 'assets/atlases/door.png', 32, 32);
+            this.game.load.spritesheet('Drink', 'assets/atlases/drink.png', 32, 32);
             this.game.load.spritesheet('Fixtures', 'assets/atlases/fixtures.png', 30, 30);
             this.game.load.spritesheet('Rewards', 'assets/atlases/reward.png', 26, 26);
             this.game.load.spritesheet('MainCharacter', 'assets/atlases/mainChar.png', 21, 31);

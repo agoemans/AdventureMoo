@@ -11,8 +11,8 @@ module AdventureRoo {
 
             this.game.physics.arcade.enable(this);
             this.body.velocity.set(0);
-            this.body.bounce.y = 0.2;
-            this.body.gravity.y = 100;
+            //this.body.bounce.y = 0.2;
+            this.body.gravity.y = 350;
             this.backgroundLayer = backgroundLayer;
             this.reward = reward;
         }
@@ -32,7 +32,7 @@ module AdventureRoo {
             } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
                 this.body.velocity.x = 0;
             } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && this.body.onFloor()) {
-                this.body.velocity.y = -250;
+                this.body.velocity.y = -300;
             }
         }
 
