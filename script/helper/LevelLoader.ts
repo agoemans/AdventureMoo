@@ -13,7 +13,7 @@ module AdventureRoo {
         constructor( game:Phaser.Game ) {
             this.game = game;
             //this.levelNumber = 'Level' + Global.Level.toString();
-            this.levelNumber = 'Level1';
+            this.levelNumber = 'Level3';
 
         }
 
@@ -22,7 +22,7 @@ module AdventureRoo {
             this.map = this.game.add.tilemap(this.levelNumber);
             this.map.addTilesetImage(this.map.tilesets[0].name, this.map.tilesets[0].name);
 
-            console.log('map', this.map);
+            //console.log('map', this.map);
 
             this.groundLayer = this.map.createLayer(this.levelNumber);
             this.groundLayer.resizeWorld();
@@ -34,18 +34,16 @@ module AdventureRoo {
             this.map.setCollision(3, true, this.levelNumber);
             this.map.setCollision(7, true, this.levelNumber);
 
-            //console.log(this.map.tilesets[0].name);
             this.map.objects.Characters.forEach(( element ) => {
-                //console.log(element);
                 switch (element.name) {
                     case 'reward':
-                        var frameNum: number = Math.ceil(this.getRandomNumber(0, 17));
+                        let frameNum: number = Math.ceil(this.getRandomNumber(0, 17));
                         console.log('frameNum', frameNum)
                         reward = new Key(this.game, element.x, element.y, 'Drink', frameNum);
                         collisionHandler.addReward(reward);
                         break;
                     case 'key':
-                        var key = new Key(this.game, element.x, element.y, 'Key', 1);
+                        let key = new Key(this.game, element.x, element.y, 'Key', 0);
                         collisionHandler.addKey(key);
                         break;
                     case 'mainCharacter':
@@ -54,27 +52,25 @@ module AdventureRoo {
                         collisionHandler.addMainCharacter(mainCharacter);
                         break;
                     case 'rat':
-                        var rat = new BadCharacter(this.game, element.x, element.y, 'Rat', 0);
-                        //rat.setLayerInfo(this.map, this.groundLayer);
+                        let rat = new BadCharacter(this.game, element.x, element.y, 'Rat', 0);
                         badGuy.add(rat);
                         collisionHandler.addEnemies(rat);
                         break;
                     case 'scorpion':
-                        var scorpion = new BadCharacter(this.game, element.x, element.y, 'Scorpion', 0);
-                        //rat.setLayerInfo(this.map, this.groundLayer);
+                        let scorpion = new BadCharacter(this.game, element.x, element.y, 'Scorpion', 0);
                         badGuy.add(scorpion);
                         collisionHandler.addEnemies(scorpion);
                         break;
                     case 'exitDoor':
-                        var exitDoor = new Door(this.game, element.x, element.y, 'Door', 3);
+                        let exitDoor = new Door(this.game, element.x, element.y, 'Door', 3);
                         collisionHandler.addExitDoor(exitDoor);
                         break;
                     case 'normalDoor':
-                        var normalDoor = new Door(this.game, element.x, element.y, 'Door', 10);
+                        let normalDoor = new Door(this.game, element.x, element.y, 'Door', 10);
                         collisionHandler.addNormalDoor(normalDoor);
                         break;
                     case 'exitSign':
-                        var exitSign = new Phaser.Sprite(this.game, element.x, element.y, 'Fixtures', 15);
+                        let exitSign = new Phaser.Sprite(this.game, element.x, element.y, 'Fixtures', 15);
                         this.game.add.existing(exitSign);
                         break;
                 }

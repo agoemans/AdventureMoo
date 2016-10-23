@@ -41,7 +41,9 @@ module AdventureRoo {
             this.game.load.spritesheet('Fixtures', 'assets/atlases/fixtures.png', 30, 30);
             this.game.load.spritesheet('Rewards', 'assets/atlases/reward.png', 26, 26);
             this.game.load.spritesheet('MainCharacter', 'assets/atlases/mainChar.png', 21, 31);
-            this.game.load.image('Button', 'assets/images/button.png');
+            this.game.load.image('StartButton', 'assets/images/startButton.png');
+            this.game.load.image('NextButton', 'assets/images/nextButton.png');
+            this.game.load.image('TryAgainButton', 'assets/images/tryagainButton.png');
 
             this.game.load.start();
         }
@@ -59,5 +61,6 @@ module AdventureRoo {
 
             this.game.state.start('TitleScreen');
         }
+
     }
 }

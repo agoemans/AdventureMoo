@@ -17,9 +17,6 @@ module AdventureRoo {
             this.reward = reward;
         }
 
-        public preload():void {
-        }
-
         public update():void {
             if(this.isDead){
                 return;

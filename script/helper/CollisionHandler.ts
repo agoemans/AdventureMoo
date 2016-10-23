@@ -8,7 +8,7 @@ module AdventureRoo {
         public exitDoor: Door;
         public key: Key;
         public normalDoor: Door;
-        public onLevelComplete: Phaser.Signal;
+        public onLevelEnd: Phaser.Signal = new Phaser.Signal;
 
         constructor(game: Phaser.Game) {
             this.game = game;
@@ -52,14 +52,11 @@ module AdventureRoo {
             this.key = key;
         }
 
-        public setLevelCompleteSignal(onlevelComplete: Phaser.Signal): void {
-            this.onLevelComplete = onlevelComplete;
+        public setLevelCompleteSignal(onlevelEnd: Phaser.Signal): void {
+            this.onLevelEnd = onlevelEnd;
         }
 
-
         public setRewardComplete(): void {
-            console.log('body')
-            console.log(this.mainCharacter.body.touching);
             this.exitDoor.isOpened();
             this.reward.isPickedUp();
             this.mainCharacter.hasReward = true;
@@ -67,18 +64,23 @@ module AdventureRoo {
         }
 
         public setLevelComplete(): void {
-            console.log('evel complete called');
             if(this.mainCharacter.hasReward){
-                this.onLevelComplete.dispatch();
+                this.onLevelEnd.dispatch(false);
                 this.exitDoor.disableForCollision();
                 this.mainCharacter.levelComplete();
             }
         }
 
+        public setLevelFail(): void {
+            //this.onLevelEnd.dispatch();
+            this.mainCharacter.prepareForDeath();
+            this.onLevelEnd.dispatch(true);
+        }
+
         public update():void {
             this.enemyList.forEach((enemy)=>{
-                this.game.physics.arcade.collide(enemy, this.mainCharacter, this.mainCharacter.prepareForDeath,
-                    null, this.mainCharacter);
+                this.game.physics.arcade.collide(enemy, this.mainCharacter, this.setLevelFail,
+                    null, this);
                 this.game.physics.arcade.collide(enemy, this.backgroundLayer, enemy.turnAround, null, enemy);
                 this.game.physics.arcade.collide(this.exitDoor, enemy);
             });

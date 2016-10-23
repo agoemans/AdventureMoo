@@ -18,8 +18,6 @@ module AdventureRoo {
         }
 
         public turnAround():void {
-            //console.log(this.mapLayer.getTileLeft(0, this.position.x, this.position.y));
-            //console.log('enemy turnaround', this.body.touching.right)
             if ( this.body.blocked.left ) {
                 this.flipped = false;
             }
@@ -29,13 +27,7 @@ module AdventureRoo {
             }
         }
 
-        public setLayerInfo( map:any, mapLayer:any ):void {
-            this.map = map;
-            this.mapLayer = mapLayer;
-        }
-
         public update():void {
-
             if ( !this.flipped ) {
                 this.body.velocity.x = 150;
             } else {

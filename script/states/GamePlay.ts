@@ -11,7 +11,7 @@ module AdventureRoo {
 
         public levelLoader:LevelLoader;
         public collisionHandler:CollisionHandler;
-        public onLevelComplete:Phaser.Signal;
+        public onLevelEnd:Phaser.Signal;
 
         constructor() {
             super();
@@ -26,14 +26,14 @@ module AdventureRoo {
             this.badGuyGroup = new Phaser.Group(this.game, null, 'badGuyGroup');
             this.game.add.existing(this.badGuyGroup);
 
-            this.onLevelComplete = new Phaser.Signal();
-            this.onLevelComplete.add(()=> {
-                this.showLevelCompleteDialog();
+            this.onLevelEnd = new Phaser.Signal();
+            this.onLevelEnd.add((endGameType)=> {
+                this.showLevelEndDialog(endGameType);
             });
 
             this.collisionHandler = new CollisionHandler(this.game);
             this.collisionHandler.setDefaults();
-            this.collisionHandler.setLevelCompleteSignal(this.onLevelComplete);
+            this.collisionHandler.setLevelCompleteSignal(this.onLevelEnd);
 
             this.levelLoader = new LevelLoader(this.game);
             this.levelLoader.load(this.mainCharacter, this.reward, this.badGuyGroup, this.collisionHandler);
@@ -45,13 +45,11 @@ module AdventureRoo {
             this.collisionHandler.update();
         }
 
-        public showLevelCompleteDialog():void {
-            var endGameDialog = new EndGameDialog(this.game, 100, 100);
+        public showLevelEndDialog(endGameType: boolean):void {
+            let endGameDialog = new EndGameDialog(this.game, endGameType);
             this.game.add.existing(endGameDialog);
-            endGameDialog.x = 100;
+            endGameDialog.x = this.game.height / 3;
             endGameDialog.y = 100;
-
-            console.log('show end dialog', endGameDialog)
         }
     }
 }
